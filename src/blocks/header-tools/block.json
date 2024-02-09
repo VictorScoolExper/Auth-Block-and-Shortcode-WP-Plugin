@@ -1,0 +1,25 @@
+{
+    "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+    "apiVersion": 2,
+    "name": "auth-block-shortcode/header-tools",
+    "title": "Header Auth Tools",
+    "category": "text",
+    "description": "Adds a header toolbar that contains an authentication link",
+    "textdomain": "auth-block-shortcode",
+    "attributes": {
+        "showAuth": {
+            "type": "boolean",
+            "default": true
+        },
+        "signedInRedirectLink": {
+          "type": "string",
+          "default": "/"
+        },
+        "textandIconColor": {
+            "type": "string",
+            "default": "#000000"
+        }
+    },
+    "editorScript": "file:./index.js",
+    "style": "file:./index.css"
+}
