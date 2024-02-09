@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       last_name: signupForm.querySelector('#su-last-name').value,
       username: signupForm.querySelector('#su-username').value,
       email: signupForm.querySelector('#su-email').value,
-      password: signupForm.querySelector('#su-password').value
+      password: signupForm.querySelector('#su-password').value,
+      userRegisterType: signupForm.querySelector('#su-user-type').textContent
     };
     const response = await fetch(abs_auth_rest.signup, {
       method: 'POST',
@@ -74,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // we force page to refresh to view page as logged in user
       location.reload();
+    } else if (responseJSON.status === 4) {
+      signupFieldset.removeAttribute('disabled');
+      signupStatus.innerHTML = `
+                <div class="modal-status modal-status-danger">
+                    Unable to create account! You need a stronger password.
+                    <small>Requirements 8 characters min, uppercase, lowercase, number, special character</small>
+                </div>
+            `;
     } else {
       signupFieldset.removeAttribute('disabled');
       signupStatus.innerHTML = `

@@ -66,6 +66,8 @@ function abs_auth_modal_render_cb($atts)
                         <form id="signup-tab">
                             <div id="signup-status"></div>
                             <fieldset>
+                                <h3 id="su-user-type"><?php echo $atts['userRegisterType'] ?></h3>
+
                                 <label>First Name</label>
                                 <input type="text" id="su-first-name" placeholder="John" />
 

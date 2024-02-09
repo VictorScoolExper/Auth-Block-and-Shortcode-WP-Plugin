@@ -213,12 +213,26 @@ __webpack_require__.r(__webpack_exports__);
   }) {
     const {
       showRegister,
-      tabColor
+      tabColor,
+      userRegisterType
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('General', 'auth-block-shortcode')
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('User Register Type', 'auth-block-shortcode'),
+      value: userRegisterType,
+      options: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Subscriber', 'auth-block-shortcode'),
+        value: 'Subscriber'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Customer', 'auth-block-shortcode'),
+        value: 'Customer'
+      }],
+      onChange: userRegisterType => setAttributes({
+        userRegisterType
+      })
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Show Register', 'auth-block-shortcode'),
       help: showRegister ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Showing registration form', 'auth-block-shortcode') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Hiding registration form', 'auth-block-shortcode'),
       checked: showRegister,

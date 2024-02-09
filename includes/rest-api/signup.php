@@ -4,6 +4,19 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+function is_strong_password($password) {
+    // Define the criteria for a strong password.
+    // Feel free to adjust these criteria based on your security requirements.
+    $minLength = 8;
+    $hasUppercase = preg_match('@[A-Z]@', $password);
+    $hasLowercase = preg_match('@[a-z]@', $password);
+    $hasNumber = preg_match('@[0-9]@', $password);
+    $hasSpecialChar = preg_match('@[^\w]@', $password);
+
+    // Check if all criteria are met.
+    return strlen($password) >= $minLength && $hasUppercase && $hasLowercase && $hasNumber && $hasSpecialChar;
+}
+
 //TODO: Add Name, Lastname and phone number(if possible)
 function abs_rest_api_signup_handler($request)
 {
@@ -26,7 +39,39 @@ function abs_rest_api_signup_handler($request)
     $email = sanitize_email($params['email']);
     $username = sanitize_text_field($params['username']);
     $password = sanitize_text_field($params['password']);
-    $user_role = 'customer';
+    $user_role = sanitize_text_field( $params['userRegisterType'] );
+
+    if (!is_strong_password($password)) {
+        // You can adjust the response to include a message about password strength requirements.
+        $response['status'] = 4; // Consider using a different status code or message to indicate the issue.
+        $response['error'] = 'Password does not meet the strength requirements.';
+        return $response;
+    }
+
+    // secure that role will not be admin
+    switch($user_role){
+        case 'Admin': 
+            echo 'Silly, Silly, Willy... You got me... Sympathy Please!!!';
+            return $response;
+        case 'admin':
+            echo 'Silly, Silly, Willy... You got me... Sympathy Please!!!';
+            return $response;
+        case 'Subscriber':
+            $user_role = 'subscriber';
+            break;
+        case 'subscriber':
+            $user_role = 'subscriber';
+            break;
+        case 'Customer':
+            $user_role = 'customer';
+            break;
+        case 'customer':
+            $user_role = 'customer';
+            break;
+        default:
+            $user_role = 'subscriber';
+            break;
+    }
 
     // checks database for existing data
     if (
