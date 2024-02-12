@@ -20,6 +20,9 @@ function is_strong_password($password) {
 //TODO: Add Name, Lastname and phone number(if possible)
 function abs_rest_api_signup_handler($request)
 {
+    // nonce handled automatically by wp
+    // check_admin_referer('abs_signup_verify');
+
     $response = ['status' => 1];
     $params = $request->get_json_params();
 
@@ -48,29 +51,10 @@ function abs_rest_api_signup_handler($request)
         return $response;
     }
 
-    // secure that role will not be admin
-    switch($user_role){
-        case 'Admin': 
-            echo 'Silly, Silly, Willy... You got me... Sympathy Please!!!';
-            return $response;
-        case 'admin':
-            echo 'Silly, Silly, Willy... You got me... Sympathy Please!!!';
-            return $response;
-        case 'Subscriber':
-            $user_role = 'subscriber';
-            break;
-        case 'subscriber':
-            $user_role = 'subscriber';
-            break;
-        case 'Customer':
-            $user_role = 'customer';
-            break;
-        case 'customer':
-            $user_role = 'customer';
-            break;
-        default:
-            $user_role = 'subscriber';
-            break;
+    if ($user_role == 'customer' || $user_role == 'Customer'){
+        $user_role = 'customer';
+    } else {
+        $user_role = 'subscriber';
     }
 
     // checks database for existing data
@@ -82,14 +66,16 @@ function abs_rest_api_signup_handler($request)
         return $response;
     }
 
-    $userID = wp_insert_user([
+    $creds = array(
         'user_login' => $username,
         'user_pass' => $password,
         'user_email' => $email,
         'first_name' => $first_name,
         'last_name' => $last_name,
         'role' => $user_role
-    ]);
+    );
+
+    $userID = wp_insert_user($creds);
 
     if (is_wp_error($userID)) {
         return $response;

@@ -58,10 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
       password: signupForm.querySelector('#su-password').value,
       userRegisterType: signupForm.querySelector('#su-user-type').textContent
     };
-    const response = await fetch(abs_auth_rest.signup, {
+    const response = await fetch(abs_auth_rest.urls.signup, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': abs_auth_rest.nonce
       },
       body: JSON.stringify(formData)
     });
@@ -107,10 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
       password: signinForm.querySelector('#si-password').value,
       remember_me: signinForm.querySelector('#si-remember-me').checked
     };
-    const response = await fetch(abs_auth_rest.signin, {
+    const response = await fetch(abs_auth_rest.urls.signin, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': abs_auth_rest.nonce
       },
       body: JSON.stringify(formData)
     });

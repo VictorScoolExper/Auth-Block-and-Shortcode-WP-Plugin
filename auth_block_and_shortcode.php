@@ -19,6 +19,10 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+/** Enforce SSL for Admin pages and logins */
+// TODO: Enable
+// define('FORCE_SSL_ADMIN', true);
+
 // Check if the 'add_action' function exists
 if (!function_exists('add_action')) {
     // If 'add_action' doesn't exist, it's likely that the file has been accessed outside of WordPress, because 'add_action' is a core WordPress function.
@@ -105,5 +109,6 @@ add_action('after_setup_theme', 'auth_block_shortcode_disable_admin_bar_for_spec
 
 // Hooks
 add_action('init', 'abs_register_blocks');
+
 add_action('rest_api_init', 'abs_rest_api_init');
 add_action('wp_enqueue_scripts', 'abs_enqueue_scripts');

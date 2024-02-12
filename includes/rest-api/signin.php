@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 
 function abs_rest_api_signin_handler($request)
 {
+
     $response = ['status' => 1];
     $params = $request->get_json_params();
 
@@ -23,15 +24,16 @@ function abs_rest_api_signin_handler($request)
 
     $email = sanitize_email($params['user_login']);
     $password = sanitize_text_field($params['password']);
-    $remember_me = sanitize_text_field( $params['remember_me'] );
-    // $remember_me = filter_var($params['remember_me'], FILTER_VALIDATE_BOOLEAN);
+    $remember_me = filter_var($params['remember_me'], FILTER_VALIDATE_BOOLEAN);
 
-    // disable remember if site handles sensitive information
-    $user = wp_signon([
+    
+    $creds = array(
         'user_login' => $email,
         'user_password' => $password,
         'remember' => $remember_me
-    ]);
+    );
+
+    $user = wp_signon($creds, is_ssl());
 
     if (is_wp_error($user)) {
         return $response;
