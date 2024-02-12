@@ -10,6 +10,8 @@ function abs_auth_modal_render_cb($atts)
         return '';
     }
 
+    $nonce = wp_create_nonce('wp_rest');
+
     ob_start();
     ?>
     <div class='wp-block-auth-block-shortcode-auth-modal'>
@@ -47,20 +49,24 @@ function abs_auth_modal_render_cb($atts)
                 <div class='modal-body'>
                     <!-- Login Form -->
                     <form id='signin-tab' style='display: block;'>
+
+                        <!-- Include the nonce here for non-AJAX fallback or clarity -->
+                        <input type='hidden' name='wp_rest_nonce' value='<?php echo esc_attr($nonce); ?>' />
+
                         <div id='signin-status'></div>
                         <fieldset>
-                            <label>Name/Email</label>
-                            <input type='text' id='si-email' placeholder='johndoe@example.com' />
+                            <label for="si-email"><?php esc_html_e('Email', 'auth-block-shortcode'); ?></label>
+                            <input type='email' id='si-email' placeholder='<?php echo esc_attr__('johndoe@example.com', 'auth-block-shortcode'); ?>' required/>
 
-                            <label>Password</label>
-                            <input type='password' id='si-password' />
+                            <label for="si-password"><?php esc_html_e('Password', 'auth-block-shortcode'); ?></label>
+                            <input type='password' id='si-password' required/>
 
-                            <label>
-                                Remember Me
+                            <label for="si-remember-me">
+                                <?php esc_html_e('Remember Me', 'auth-block-shortcode'); ?>
                                 <input type='checkbox' id='si-remember-me' style='width: 30px;'>
                             </label>
 
-                            <button type='submit'>Sign in</button>
+                            <button type='submit'><?php esc_html_e('Sign in', 'auth-block-shortcode'); ?></button>
                         </fieldset>
                     </form>
                     <?php
@@ -68,29 +74,42 @@ function abs_auth_modal_render_cb($atts)
                         ?>
                         <!-- Register Form -->
                         <form id='signup-tab'>
+
+                            <!-- Include the nonce here for non-AJAX fallback or clarity -->
+                            <input type='hidden' name='wp_rest_nonce' value='<?php echo esc_attr($nonce); ?>' />
+
                             <div id='signup-status'></div>
+                           
                             <fieldset>
-                                <h3 id='su-user-type'><?php echo $atts['userRegisterType'] ?></h3>
+                                <h3 id='su-user-type'><?php echo esc_html($atts['userRegisterType']); ?></h3>
 
-                                <label><?php esc_html_e( 'First Name', 'auth-block-shortcode' ) ?></label>
-                                <input type='text' id='su-first-name' placeholder='John' >
+                                <label for="su-first-name"><?php esc_html_e('First Name', 'auth-block-shortcode'); ?></label>
+                                <input type='text' id='su-first-name' 
+                                        placeholder='<?php echo esc_attr__('John', 'auth-block-shortcode'); ?>' 
+                                        required>
 
-                                <label><?php  esc_html_e('Last Name', 'auth-block-shortcode') ?></label>
-                                <input type='text' id='su-last-name' placeholder='Doe' >
+                                <label for="su-last-name"><?php esc_html_e('Last Name', 'auth-block-shortcode'); ?></label>
+                                <input type='text' id='su-last-name' 
+                                        placeholder='<?php echo esc_attr__('Doe', 'auth-block-shortcode'); ?>'
+                                        required>
 
-                                <label><?php esc_html_e('Username', 'auth-block-shortcode') ?></label>
-                                <input type='text' id='su-username' placeholder='John123' >
+                                <label for="su-username"><?php esc_html_e('Username', 'auth-block-shortcode'); ?></label>
+                                <input type='text' id='su-username' 
+                                        placeholder='<?php echo esc_attr__('John123', 'auth-block-shortcode'); ?>' 
+                                        required>
 
-                                <label><?php esc_html_e('Email address', 'auth-block-shortcode') ?></label>
-                                <input type='email' id='su-email' placeholder='johndoe@example.com' >
+                                <label for="su-email"><?php esc_html_e('Email address', 'auth-block-shortcode'); ?></label>
+                                <input type='email' id='su-email' 
+                                        placeholder='<?php echo esc_attr__('johndoe@example.com', 'auth-block-shortcode'); ?>' 
+                                        required>
 
-                                <label for='su-password'><?php esc_html_e('Password', 'auth-block-shortcode') ?></label>
+                                <label for='su-password'><?php esc_html_e('Password', 'auth-block-shortcode'); ?></label>
                                 <input type='password' id='su-password' 
                                     pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' 
-                                    title='Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters' 
+                                    title='<?php echo esc_attr__('Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters', 'auth-block-shortcode'); ?>' 
                                     required>
 
-                                <button type='submit'>Sign up</button>
+                                <button type='submit'><?php esc_html_e('Sign up', 'auth-block-shortcode'); ?></button>
                             </fieldset>
                         </form>
                         <?php
