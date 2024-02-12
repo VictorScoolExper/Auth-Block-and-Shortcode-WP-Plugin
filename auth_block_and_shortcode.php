@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 
 /** Enforce SSL for Admin pages and logins */
 // TODO: Enable
-// define('FORCE_SSL_ADMIN', true);
+define('FORCE_SSL_ADMIN', true);
 
 // Check if the 'add_action' function exists
 if (!function_exists('add_action')) {
