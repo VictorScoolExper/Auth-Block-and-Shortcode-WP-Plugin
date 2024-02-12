@@ -125,6 +125,8 @@
 .wp-block-auth-block-shortcode-auth-modal .tabs {
   margin-top: 0px;
   margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
   display: flex;
   list-style-type: none;
   border-bottom-width: 1px;
