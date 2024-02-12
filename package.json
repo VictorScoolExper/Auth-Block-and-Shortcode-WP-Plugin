@@ -22,6 +22,6 @@
   "author": "Victor Martinez",
   "license": "ISC",
   "devDependencies": {
-    "@wordpress/scripts": "^27.1.0"
+    "@wordpress/scripts": "^27.2.0"
   }
 }

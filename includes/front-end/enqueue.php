@@ -18,13 +18,13 @@
         //     'before' // we can change this to 'after', if you want to load after
         // );
 
-         // URLs and nonce for REST API
+        // URLs and nonce for REST API
         $script_data = array(
             'urls' => array(
                 'signup' => esc_url_raw(rest_url('abs/v1/signup')),
                 'signin' => esc_url_raw(rest_url('abs/v1/signin'))
             ),
-            'nonce' => wp_create_nonce('wp_rest') // Generate the nonce here
+            'nonce' => wp_create_nonce('wp_rest')
         );
 
         // Properly localize the script
