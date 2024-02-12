@@ -5,7 +5,7 @@
  * Description:       A plugin for adding blocks to a theme.
  * Version:           0.1.0
  * Requires at least: 6.4
- * Requires PHP:      8.1
+ * Requires PHP:      7.4
  * Author:            The North Tech
  * Author URI:        https://thenorth.tech/
  * License:           GPL v2 or later
