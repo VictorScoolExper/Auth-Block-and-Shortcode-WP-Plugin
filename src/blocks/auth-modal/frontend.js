@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         signinFieldset.setAttribute('disabled', true);
         signinStatus.innerHTML = `
-            <div class="modal=status modal-status-info">
+            <div class="modal-status modal-status-info">
                 Please wait! We are logging you in.
             </div>
         `;

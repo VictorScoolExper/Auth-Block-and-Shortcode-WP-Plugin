@@ -108,6 +108,11 @@ function abs_auth_modal_render_cb($atts)
                                     pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' 
                                     title='<?php echo esc_attr__('Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters', 'auth-block-shortcode'); ?>' 
                                     required>
+                                
+                                <div class="woocommerce-privacy-policy-text">
+                                    <p><?php echo esc_html__('Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our', 'your-text-domain'); ?> <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>" class="woocommerce-privacy-policy-link" target="_blank"><?php echo esc_html__('privacy policy', 'your-text-domain'); ?></a>.</p>
+                                </div>
+
 
                                 <button type='submit'><?php esc_html_e('Sign up', 'auth-block-shortcode'); ?></button>
                             </fieldset>
