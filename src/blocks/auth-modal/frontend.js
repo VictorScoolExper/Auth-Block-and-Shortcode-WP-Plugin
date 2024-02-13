@@ -87,7 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             // we force page to refresh to view page as logged in user
-            location.reload();
+            // location.reload();
+
+            setTimeout(function() {
+                location.href = '/';
+            }, 2000); 
         } else if(responseJSON.status === 4){
             signupFieldset.removeAttribute('disabled');
             signupStatus.innerHTML = `
@@ -142,7 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     Success! You are now logged in.
                 </div>
             `;
-            location.reload();
+            // location.reload();
+            setTimeout(function() {
+                location.href = '/';
+            }, 2000); 
         } else {
             signinFieldset.removeAttribute('disabled');
             signinStatus.innerHTML = `
